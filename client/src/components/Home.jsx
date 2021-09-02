@@ -1,13 +1,27 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDog } from "../actions";
+import { filterCreated, getDog, orderByName } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
+import Paginado from "./Paginado";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
+
+  //paginado
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const [orden, setOrden] = useState(" ");
+  const indexOfLastDogs = currentPage * dogsPerPage; //8
+  const indexOfFirstDogs = indexOfLastDogs - dogsPerPage; //0
+  const currentDogs = allDogs.slice(indexOfFirstDogs, indexOfLastDogs);
+
+  //ayuda al renderizado
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     dispatch(getDog());
@@ -18,6 +32,17 @@ export default function Home() {
     dispatch(getDog());
   }
 
+  function handleFilterCreated(e) {
+    e.preventDefault();
+    dispatch(filterCreated(e.target.value));
+  }
+
+  function handleSortName(e) {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setOrden(`Ordenado${e.target.value}`);
+  }
   return (
     <div>
       <Link to="/dogs">Crear Dog</Link>
@@ -30,20 +55,25 @@ export default function Home() {
         Volver a Cargas los Dogs
       </button>
       <div>
-        <select>
-          <option value="asc">Ascendente</option>
-          <option value="desc">Descendente</option>
+        <select onChange={(e) => handleSortName(e)}>
+          <option value="asc">OAscendente</option>
+          <option value="desc">ODescendente</option>
         </select>
         <select>
-          <option value="pesoasc">Ascendente</option>
-          <option value="pesodesc">Descendente</option>
+          <option value="pesoasc">PAscendente</option>
+          <option value="pesodesc">PDescendente</option>
         </select>
-        <select>
+        <select onChange={(e) => handleFilterCreated(e)}>
           <option value="todos">Todos</option>
           <option value="creados">Creados</option>
           <option value="existentes">Existentes</option>
         </select>
-        {allDogs?.map((c) => {
+        <Paginado
+          dogsPerPage={dogsPerPage}
+          allDogs={allDogs.length}
+          paginado={paginado}
+        />
+        {currentDogs?.map((c) => {
           return (
             <Fragment key={c.id}>
               <Link to={"/home/" + c.id}>
@@ -51,7 +81,11 @@ export default function Home() {
                   name={c.name}
                   image={c.image}
                   peso={c.peso}
-                  temperamento={c.temperament}
+                  temperamento={
+                    c.createdInDb && c.temperaments[0].name
+                      ? c.temperaments[0].name
+                      : c.temperament
+                  }
                 />
               </Link>
             </Fragment>
