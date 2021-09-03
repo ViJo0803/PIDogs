@@ -46,6 +46,24 @@ function rootReducer(state = initialState, action) {
         ...state,
         dogs: sortedArr,
       };
+    case "ORDER_BY_PESO":
+      let sortedArrPeso =
+        action.payload === "pesoasc"
+          ? state.dogs.sort(function (a, b) {
+              console.log(a.peso.split("- ")[0]);
+              return (
+                a.peso.trim().split("- ")[0] - b.peso.trim().split("- ")[0]
+              );
+            })
+          : state.dogs.sort(function (a, b) {
+              return (
+                b.peso.trim().split("- ")[0] - a.peso.trim().split("- ")[0]
+              );
+            });
+      return {
+        ...state,
+        dogs: sortedArrPeso,
+      };
     default:
       return state;
   }

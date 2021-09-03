@@ -10,9 +10,9 @@ export function getDog() {
   };
 }
 
-export function filterDogsByStatus(payload) {
+export function orderByPeso(payload) {
   return {
-    type: "FILTER_BY_STATUS",
+    type: "ORDER_BY_PESO",
     payload,
   };
 }

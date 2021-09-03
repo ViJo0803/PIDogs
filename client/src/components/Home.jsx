@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterCreated, getDog, orderByName } from "../actions";
+import { filterCreated, getDog, orderByName, orderByPeso } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
@@ -37,6 +37,13 @@ export default function Home() {
     dispatch(filterCreated(e.target.value));
   }
 
+  function handleSortPeso(e) {
+    e.preventDefault();
+    dispatch(orderByPeso(e.target.value));
+    setCurrentPage(1);
+    setOrden(`Ordenado${e.target.value}`);
+  }
+
   function handleSortName(e) {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
@@ -59,7 +66,7 @@ export default function Home() {
           <option value="asc">OAscendente</option>
           <option value="desc">ODescendente</option>
         </select>
-        <select>
+        <select onChange={(e) => handleSortPeso(e)}>
           <option value="pesoasc">PAscendente</option>
           <option value="pesodesc">PDescendente</option>
         </select>
