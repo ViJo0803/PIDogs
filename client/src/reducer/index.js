@@ -50,15 +50,21 @@ function rootReducer(state = initialState, action) {
       let sortedArrPeso =
         action.payload === "pesoasc"
           ? state.dogs.sort(function (a, b) {
-              console.log(a.peso.split("- ")[0]);
-              return (
-                a.peso.trim().split("- ")[0] - b.peso.trim().split("- ")[0]
-              );
+              b = b.peso.trim().split(" - ")[0];
+              a = a.peso.trim().split(" - ")[0];
+              if (!Number(b)) b = 100;
+
+              if (!Number(a)) a = 100;
+              return a - b;
             })
           : state.dogs.sort(function (a, b) {
-              return (
-                b.peso.trim().split("- ")[0] - a.peso.trim().split("- ")[0]
-              );
+              b = b.peso.trim().split(" - ")[0];
+              a = a.peso.trim().split(" - ")[0];
+              if (!Number(b)) b = 0;
+
+              if (!Number(a)) a = 0;
+
+              return b - a;
             });
       return {
         ...state,
