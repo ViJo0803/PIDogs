@@ -30,3 +30,31 @@ export function orderByName(payload) {
     payload,
   };
 }
+
+export function getNameDogs(name) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/dogs?name=" + name);
+      return dispatch({
+        type: "GET_NAME_DOGS",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getBreeds() {
+  return async function (dispatch) {
+    var info = await axios.get("http://localhost:3001/temperament");
+    return dispatch({ type: "GET_BREEDS", payload: info.data });
+  };
+}
+
+export function postDogs(payload) {
+  return async function (dispatch) {
+    const response = await axios.post("http://localhost:3001/dogs", payload);
+    return response;
+  };
+}

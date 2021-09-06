@@ -1,6 +1,7 @@
 const initialState = {
   dogs: [],
   alldogs: [],
+  breeds: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -45,6 +46,20 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         dogs: sortedArr,
+      };
+    case "POST_DOGS":
+      return {
+        ...state,
+      };
+    case "GET_BREEDS":
+      return {
+        ...state,
+        breeds: action.payload,
+      };
+    case "GET_NAME_DOGS":
+      return {
+        ...state,
+        dogs: action.payload,
       };
     case "ORDER_BY_PESO":
       let sortedArrPeso =

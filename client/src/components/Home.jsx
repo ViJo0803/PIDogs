@@ -5,6 +5,7 @@ import { filterCreated, getDog, orderByName, orderByPeso } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
+import SearchBar from "./SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ export default function Home() {
           allDogs={allDogs.length}
           paginado={paginado}
         />
+        <SearchBar />
         {currentDogs?.map((c) => {
           return (
             <Fragment key={c.id}>
