@@ -92,7 +92,7 @@ export default function Home() {
                   peso={c.peso}
                   temperamento={
                     c.createdInDb && c.temperaments[0].name
-                      ? c.temperaments[0].name
+                      ? c.temperaments.map((e) => e.name + ", ")
                       : c.temperament
                   }
                 />
