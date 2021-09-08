@@ -13,8 +13,8 @@ export default function Home() {
 
   //paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage, setDogsPerPage] = useState(8);
-  const [orden, setOrden] = useState(" ");
+  const [dogsPerPage] = useState(8);
+  const [setOrden] = useState(" ");
   const indexOfLastDogs = currentPage * dogsPerPage; //8
   const indexOfFirstDogs = indexOfLastDogs - dogsPerPage; //0
   const currentDogs = allDogs.slice(indexOfFirstDogs, indexOfLastDogs);

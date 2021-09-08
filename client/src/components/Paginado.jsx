@@ -12,7 +12,7 @@ export default function Paginado({ dogsPerPage, allDogs, paginado }) {
         {pageNumbers &&
           pageNumbers.map((number) => (
             <li key={number}>
-              <a onClick={() => paginado(number)}>{number}</a>
+              <p onClick={() => paginado(number)}>{number}</p>
             </li>
           ))}
       </ul>

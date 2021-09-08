@@ -54,11 +54,11 @@ function validate(input) {
     errors.anosVida = "EL promedio años vida debe ser menor a 15";
   } else if (!input.image) {
     errors.image = "Debes ingresar una imagen";
-  } else if (input.temperamento.length == 0) {
+  } else if (input.temperamento.length === 0) {
     errors.temperamento = "Seleccione 1 temperamento";
     console.log(input.temperamento);
   } else {
-    console.log(input.temperamento + "2");
+    console.log(input.temperamento);
   }
   return errors;
 }
@@ -100,6 +100,13 @@ export default function BreedCreate() {
     history.push("/home");
   }
 
+  function handleDelete(e) {
+    setInput({
+      ...input,
+      temperamento: input.temperamento.filter((el) => el !== e),
+    });
+  }
+
   function handleChange(e) {
     setInput({
       ...input,
@@ -137,7 +144,7 @@ export default function BreedCreate() {
 
   useEffect(() => {
     dispatch(getBreeds());
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <Link to="/home">
@@ -232,6 +239,14 @@ export default function BreedCreate() {
           Crear Raza
         </button>
       </form>
+      {input.temperamento.map((el) => (
+        <div key={el + "cd"} className="divTemperamento">
+          <p>{el}</p>
+          <button className="botonX" onClick={() => handleDelete(el)}>
+            x
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
