@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../actions";
+import { getDetail } from "../../actions";
 import { useEffect } from "react";
 
 export default function Detail(props) {

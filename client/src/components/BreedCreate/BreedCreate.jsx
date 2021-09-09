@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { postDogs, getBreeds } from "../actions/index";
+import { postDogs, getBreeds } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
 function validate(input) {

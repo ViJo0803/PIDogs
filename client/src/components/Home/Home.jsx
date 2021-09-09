@@ -8,11 +8,11 @@ import {
   orderByPeso,
   getBreeds,
   filterTemperament,
-} from "../actions";
+} from "../../actions";
 import { Link } from "react-router-dom";
-import Card from "./Card";
-import Paginado from "./Paginado";
-import SearchBar from "./SearchBar";
+import Card from "../Card/Card";
+import Paginado from "../Paginado/Paginado";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ export default function Home() {
 
   //paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage] = useState(8);
-  const [setOrden] = useState(" ");
+  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const [orden, setOrden] = useState(" ");
   const indexOfLastDogs = currentPage * dogsPerPage; //8
   const indexOfFirstDogs = indexOfLastDogs - dogsPerPage; //0
   const currentDogs = allDogs.slice(indexOfFirstDogs, indexOfLastDogs);
