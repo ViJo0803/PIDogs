@@ -1,7 +1,14 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterCreated, getDog, orderByName, orderByPeso } from "../actions";
+import {
+  filterCreated,
+  getDog,
+  orderByName,
+  orderByPeso,
+  getBreeds,
+  filterTemperament,
+} from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
@@ -10,6 +17,7 @@ import SearchBar from "./SearchBar";
 export default function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
+  const breeds = useSelector((state) => state.breeds);
 
   //paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,6 +36,10 @@ export default function Home() {
     dispatch(getDog());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getBreeds());
+  }, [dispatch]);
+
   function handleClick(e) {
     e.preventDefault();
     dispatch(getDog());
@@ -38,6 +50,10 @@ export default function Home() {
     dispatch(filterCreated(e.target.value));
   }
 
+  function handleFilterTemperament(e) {
+    e.preventDefault();
+    dispatch(filterTemperament(e.target.value));
+  }
   function handleSortPeso(e) {
     e.preventDefault();
     dispatch(orderByPeso(e.target.value));
@@ -75,6 +91,14 @@ export default function Home() {
           <option value="todos">Todos</option>
           <option value="creados">Creados</option>
           <option value="existentes">Existentes</option>
+        </select>
+        <select onChange={(e) => handleFilterTemperament(e)}>
+          <option value="Todos">Todos</option>
+          {breeds.map((el) => (
+            <option key={el.id} value={el.name}>
+              {el.name}
+            </option>
+          ))}
         </select>
         <Paginado
           dogsPerPage={dogsPerPage}

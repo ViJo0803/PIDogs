@@ -15,6 +15,7 @@ function rootReducer(state = initialState, action) {
       };
     case "FILTER_CREATED":
       const allDogs = state.alldogs;
+      console.log(allDogs);
       const createdfilter =
         action.payload === "creados"
           ? allDogs.filter((el) => el.createdInDb)
@@ -22,6 +23,21 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         dogs: action.payload === "todos" ? state.alldogs : createdfilter,
+      };
+    case "FILTER_TEMPERAMENT":
+      const Dogs = state.alldogs;
+      const temperament =
+        action.payload === "Todos"
+          ? Dogs
+          : Dogs.filter(
+              (el) =>
+                el.temperament &&
+                el.temperament.split(", ").find((e) => e === action.payload)
+            );
+      console.log("filtro temperamentos", Dogs);
+      return {
+        ...state,
+        dogs: temperament,
       };
     case "ORDER_BY_NAME":
       let sortedArr =

@@ -145,6 +145,7 @@ export default function BreedCreate() {
   useEffect(() => {
     dispatch(getBreeds());
   }, [dispatch]);
+
   return (
     <div>
       <Link to="/home">

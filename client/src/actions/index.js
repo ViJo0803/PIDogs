@@ -24,6 +24,13 @@ export function filterCreated(payload) {
   };
 }
 
+export function filterTemperament(payload) {
+  return {
+    type: "FILTER_TEMPERAMENT",
+    payload,
+  };
+}
+
 export function orderByName(payload) {
   return {
     type: "ORDER_BY_NAME",
