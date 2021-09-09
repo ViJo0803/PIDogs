@@ -1,0 +1,5 @@
+.capa {
+  background: url("../imagenes/fondo.jpg") center center no-repeat;
+  background-size: 100px 150px;
+  background-size: cover;
+}
