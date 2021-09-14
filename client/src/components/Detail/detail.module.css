@@ -1,0 +1,70 @@
+.btn {
+  border: 0;
+  color: #ffffff;
+  background: black;
+  padding: 10px 20px 10px 20px;
+  border-radius: 15px;
+  font-size: 30px;
+}
+
+.btn:hover {
+  background: rgba(56, 3, 3, 0.658);
+}
+
+.img {
+  width: 650px;
+  height: 600px;
+}
+
+.header {
+  /* Stick to the top */
+  position: sticky;
+  top: 0;
+  background-color: black;
+  color: white;
+  display: grid;
+  align-content: center;
+  margin-bottom: 50px;
+}
+
+.container {
+  background: url("../imagenes/fondo3.jpg");
+  height: 1200px;
+}
+
+.card {
+  width: 650px;
+  height: 1050px;
+  border-radius: 50px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.973);
+  overflow: hidden;
+  text-align: center;
+  background-color: #ffffff;
+  margin-left: 36%;
+}
+
+.containerDetalle {
+  display: grid;
+
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 0px;
+  height: 100%;
+}
+
+.item0 {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  align-items: center;
+}
+
+.silueta {
+  width: 200px;
+  height: 220px;
+  margin-top: 20px;
+}
+
+.h1 {
+  line-height: 5px;
+}

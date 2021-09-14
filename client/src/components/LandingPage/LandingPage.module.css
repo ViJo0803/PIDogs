@@ -1,5 +1,38 @@
-.capa {
-  background: url("../imagenes/fondo.jpg") center center no-repeat;
-  background-size: 100px 150px;
-  background-size: cover;
+.header {
+  position: sticky;
+  top: 0;
+  background-color: black;
+  color: white;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  gap: 0px;
+  height: 100%;
+}
+
+.h1 {
+  align-content: center;
+  align-items: center;
+}
+.contain {
+  background: url("../imagenes/fondo.jpg");
+  height: 1105px;
+}
+
+.btn {
+  border-radius: 28px;
+  color: #ffffff;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  font-size: 30px;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+}
+
+.divboton {
+  position: absolute;
+  left: 210px;
+  top: 500px;
 }

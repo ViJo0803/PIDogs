@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postDogs, getBreeds } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import style from "../BreedCreate/breedcreate.module.css";
+let estado = false;
 
 function validate(input) {
+  estado = false;
   let errors = {};
   if (!input.name) {
     errors.name = "Se requiere un Nombre";
@@ -56,9 +59,8 @@ function validate(input) {
     errors.image = "Debes ingresar una imagen";
   } else if (input.temperamento.length === 0) {
     errors.temperamento = "Seleccione 1 temperamento";
-    console.log(input.temperamento);
   } else {
-    console.log(input.temperamento);
+    estado = true;
   }
   return errors;
 }
@@ -124,8 +126,11 @@ export default function BreedCreate() {
   function handleSelect(e) {
     setInput({
       ...input,
-      temperamento: [...input.temperamento, e.target.value],
+      temperamento: input.temperamento.includes(e.target.value)
+        ? [...input.temperamento]
+        : [...input.temperamento, e.target.value],
     });
+
     setErrors(
       validate({
         ...input,
@@ -147,15 +152,41 @@ export default function BreedCreate() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Link to="/home">
-        <button>Volver</button>
-      </Link>
-      <h1>Crea tu personaje</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <div className={style.container}>
+      <header className={style.header}>
+        <button className={style.btn}>
+          <Link to="/home" className={style.color}>
+            <h2>Volver</h2>
+          </Link>
+        </button>
+        <h1>Crea tu Raza</h1>
+
+        <button
+          disabled={!estado}
+          id="btnCrear"
+          className={style.btn}
+          type="submit"
+          onClick={(e) => handleAltura(e)}
+        >
+          <h2>Crear</h2>
+        </button>
+      </header>
+      <aside className={style.container_left}>
+        <h2>Temperamentos Agregados</h2>
+        {input.temperamento.map((el) => (
+          <div key={el + "cd"} className="divTemperamento">
+            <p>{el}</p>
+            <button className={style.btnp} onClick={() => handleDelete(el)}>
+              x
+            </button>
+          </div>
+        ))}
+      </aside>
+      <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
         <div>
-          <label>Nombre</label>
+          <label className={style.label}>Nombre</label>
           <input
+            className={style.input}
             type="text"
             value={input.name}
             name="name"
@@ -164,17 +195,19 @@ export default function BreedCreate() {
           {errors.name && <p className="error">{errors.name}</p>}
         </div>
         <div>
-          <label>Altura</label>
+          <label className={style.label}>Altura</label>
           <div>
-            <label>Min.</label>
+            <label className={style.label1}>Min.</label>
             <input
+              className={style.input}
               type="text"
               value={input.alturamin}
               name="alturamin"
               onChange={(e) => handleChange(e)}
             ></input>
-            <label>Max.</label>
+            <label className={style.label1}>Max.</label>
             <input
+              className={style.input}
               type="text"
               value={input.alturamax}
               name="alturamax"
@@ -184,17 +217,19 @@ export default function BreedCreate() {
         </div>
         {errors.altura && <p className="error">{errors.altura}</p>}
         <div>
-          <label>Peso</label>
+          <label className={style.label}>Peso</label>
           <div>
-            <label>Min.</label>
+            <label className={style.label1}>Min.</label>
             <input
+              className={style.input}
               type="text"
               value={input.pesomin}
               name="pesomin"
               onChange={(e) => handleChange(e)}
             ></input>
-            <label>Max</label>
+            <label className={style.label1}>Max</label>
             <input
+              className={style.input}
               type="text"
               value={input.pesomax}
               name="pesomax"
@@ -204,8 +239,9 @@ export default function BreedCreate() {
         </div>
         {errors.peso && <p className="error">{errors.peso}</p>}
         <div>
-          <label>Anos Vida</label>
+          <label className={style.label}>Años Vida</label>
           <input
+            className={style.input}
             type="text"
             value={input.anosVida}
             name="anosVida"
@@ -214,8 +250,9 @@ export default function BreedCreate() {
         </div>
         {errors.anosVida && <p className="error">{errors.anosVida}</p>}
         <div>
-          <label>Imagen</label>
+          <label className={style.label}>Imagen</label>
           <input
+            className={style.input}
             type="text"
             value={input.image}
             name="image"
@@ -225,29 +262,18 @@ export default function BreedCreate() {
         {errors.image && <p className="error">{errors.image}</p>}
 
         <select onChange={(e) => handleSelect(e)}>
-          <option value="0">Seleccionar</option>
+          <option value="0">Temperamento</option>
           {breeds.map((el) => (
             <option key={el.id} value={el.name}>
               {el.name}
             </option>
           ))}
         </select>
-        <ul>
-          <li>{input.temperamento.map((el) => el + " ,")}</li>
-        </ul>
+
+        <p>{input.temperamento.map((el) => el + " ,")}</p>
+
         {errors.temperamento && <p className="error">{errors.temperamento}</p>}
-        <button type="submit" onClick={(e) => handleAltura(e)}>
-          Crear Raza
-        </button>
       </form>
-      {input.temperamento.map((el) => (
-        <div key={el + "cd"} className="divTemperamento">
-          <p>{el}</p>
-          <button className="botonX" onClick={() => handleDelete(el)}>
-            x
-          </button>
-        </div>
-      ))}
     </div>
   );
 }

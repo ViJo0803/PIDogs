@@ -1,0 +1,23 @@
+.dots {
+  background-color: white;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  align-items: center;
+}
+
+.dotsItem {
+  width: 100px;
+  height: 80px;
+  line-height: 60px;
+  text-align: center;
+  color: black;
+  font-size: 19px;
+  font-weight: 700;
+  transition: 0.2s linear;
+}
+
+.dotsItem:hover {
+  color: rgb(122, 165, 42);
+}

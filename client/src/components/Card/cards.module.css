@@ -1,0 +1,34 @@
+.cardsItem {
+  width: 330px;
+  height: 470px;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.973);
+  overflow: hidden;
+  margin: 20px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.cardsItem:hover {
+  background: rgba(46, 45, 42, 0.795);
+}
+
+.Images {
+  width: 330px;
+  height: 260px;
+}
+
+.titulo {
+  color: black;
+  font-weight: 600;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.content {
+  color: black;
+  font-weight: 200;
+  line-height: 1.5;
+  margin-bottom: 0.3em;
+  margin-top: 0.3em;
+}

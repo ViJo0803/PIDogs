@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import SearchBar from "../SearchBar/SearchBar";
+import style from "./home.module.css";
+import logo from "../imagenes/logo.jpg";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -68,63 +70,92 @@ export default function Home() {
     setOrden(`Ordenado${e.target.value}`);
   }
   return (
-    <div>
-      <Link to="/dogs">Crear Dog</Link>
-      <h1>Vamos Dogs</h1>
-      <button
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Volver a Cargas los Dogs
-      </button>
-      <div>
-        <select onChange={(e) => handleSortName(e)}>
-          <option value="asc">OAscendente</option>
-          <option value="desc">ODescendente</option>
-        </select>
-        <select onChange={(e) => handleSortPeso(e)}>
-          <option value="pesoasc">PAscendente</option>
-          <option value="pesodesc">PDescendente</option>
-        </select>
-        <select onChange={(e) => handleFilterCreated(e)}>
-          <option value="todos">Todos</option>
-          <option value="creados">Creados</option>
-          <option value="existentes">Existentes</option>
-        </select>
-        <select onChange={(e) => handleFilterTemperament(e)}>
-          <option value="Todos">Todos</option>
-          {breeds.map((el) => (
-            <option key={el.id} value={el.name}>
-              {el.name}
-            </option>
-          ))}
-        </select>
+    <div className={style.container}>
+      <header className={style.header}>
+        <button className={style.btn}>
+          <Link to="/dogs" className={style.color}>
+            <h1>Crear Raza</h1>
+          </Link>
+        </button>
+        <h1>Vamos Dogs</h1>
+        <button
+          className={style.btn}
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          <h1>Recargar</h1>
+        </button>
+      </header>
+      <div className={style.paginado}>
         <Paginado
           dogsPerPage={dogsPerPage}
           allDogs={allDogs.length}
           paginado={paginado}
         />
-        <SearchBar />
-        {currentDogs?.map((c) => {
-          return (
-            <Fragment key={c.id}>
-              <Link to={"/home/" + c.id}>
-                <Card
-                  name={c.name}
-                  image={c.image}
-                  peso={c.peso}
-                  temperamento={
-                    c.createdInDb && c.temperaments[0].name
-                      ? c.temperaments.map((e) => e.name + ", ")
-                      : c.temperament
-                  }
-                />
-              </Link>
-            </Fragment>
-          );
-        })}
       </div>
+      <main className={style.main}>
+        <aside className={style.container_left}>
+          <div>
+            <SearchBar />
+          </div>
+          <div>
+            <h3>Ordenar:</h3>
+            <select onChange={(e) => handleSortName(e)}>
+              <option>Alfabeticamente</option>
+              <option value="asc">Ascendente</option>
+              <option value="desc">Descendente</option>
+            </select>
+            <select onChange={(e) => handleSortPeso(e)}>
+              <option>Peso</option>
+              <option value="pesoasc">Ascendente</option>
+              <option value="pesodesc">Descendente</option>
+            </select>
+          </div>
+          <div className={style.item3}>
+            <h3>Filtrar:</h3>
+            <select onChange={(e) => handleFilterCreated(e)}>
+              <option value="todos">Todos</option>
+              <option value="creados">Creados</option>
+              <option value="existentes">Existentes</option>
+            </select>
+            <select onChange={(e) => handleFilterTemperament(e)}>
+              <option value="Todos">Temperamentos</option>
+              {breeds.map((el) => (
+                <option key={el.id} value={el.name}>
+                  {el.name}
+                </option>
+              ))}
+            </select>
+            <img
+              className={style.image}
+              src={logo}
+              alt="no se encuentra a imagen"
+            />
+          </div>
+        </aside>
+
+        <div className={style.cards}>
+          {currentDogs?.map((c) => {
+            return (
+              <Fragment key={c.id}>
+                <Link to={"/home/" + c.id} className={style.color}>
+                  <Card
+                    name={c.name}
+                    image={c.image}
+                    peso={c.peso}
+                    temperamento={
+                      c.createdInDb && c.temperaments[0].name
+                        ? c.temperaments.map((e) => e.name + ", ")
+                        : c.temperament
+                    }
+                  />
+                </Link>
+              </Fragment>
+            );
+          })}
+        </div>
+      </main>
     </div>
   );
 }
