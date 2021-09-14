@@ -77,7 +77,7 @@ export default function Home() {
             <h1>Crear Raza</h1>
           </Link>
         </button>
-        <h1>Vamos Dogs</h1>
+        <h1>Razas de Firulais</h1>
         <button
           className={style.btn}
           onClick={(e) => {
