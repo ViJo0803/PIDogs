@@ -116,3 +116,9 @@ button:disabled {
   padding: 100px 10px 10px 10px;
   background-color: white;
 }
+
+select {
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-left: 10px;
+}
