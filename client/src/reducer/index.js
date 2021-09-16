@@ -15,7 +15,7 @@ function rootReducer(state = initialState, action) {
       };
     case "FILTER_CREATED":
       const allDogs = state.alldogs;
-      console.log(allDogs);
+
       const createdfilter =
         action.payload === "creados"
           ? allDogs.filter((el) => el.createdInDb)

@@ -57,7 +57,7 @@ function validate(input) {
     errors.anosVida = "EL promedio años vida debe ser menor a 15";
   } else if (!input.image) {
     errors.image = "Debes ingresar una imagen";
-  } else if (input.temperamento.length === 0) {
+  } else if (!input.temperamento.length) {
     errors.temperamento = "Seleccione 1 temperamento";
   } else {
     estado = true;
@@ -86,7 +86,7 @@ export default function BreedCreate() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
+
     dispatch(postDogs(input));
     alert("Raza Creada!!");
     setInput({
@@ -160,16 +160,6 @@ export default function BreedCreate() {
           </Link>
         </button>
         <h1>Crea tu Raza</h1>
-
-        <button
-          disabled={!estado}
-          id="btnCrear"
-          className={style.btn}
-          type="submit"
-          onClick={(e) => handleAltura(e)}
-        >
-          <h2>Crear</h2>
-        </button>
       </header>
       <aside className={style.container_left}>
         <h2>Temperamentos Agregados</h2>
@@ -270,9 +260,18 @@ export default function BreedCreate() {
           ))}
         </select>
 
-        <p>{input.temperamento.map((el) => el + " ,")}</p>
+        <p>{input.temperamento.map((el) => el + ", ")}</p>
 
         {errors.temperamento && <p className="error">{errors.temperamento}</p>}
+        <button
+          disabled={!estado}
+          id="btnCrear"
+          className={style.btn}
+          type="submit"
+          onClick={(e) => handleAltura(e)}
+        >
+          <h2>Crear</h2>
+        </button>
       </form>
     </div>
   );

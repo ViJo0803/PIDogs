@@ -63,7 +63,9 @@ router.get("/dogs/:id", async (req, res) => {
   const id = req.params.id;
   let razasAll = await getAllRazas();
   if (id) {
-    let raza = await razasAll.filter((el) => parseInt(el.id) === parseInt(id));
+    let raza = await razasAll.filter(
+      (el) => el.id.toString() === id.toString()
+    );
     raza.length
       ? res.status(200).send(raza)
       : res.status(404).send("No existe el id ingresado");

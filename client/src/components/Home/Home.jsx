@@ -24,10 +24,15 @@ export default function Home() {
   //paginado
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage, setDogsPerPage] = useState(8);
+
   const [orden, setOrden] = useState(" ");
+
   const indexOfLastDogs = currentPage * dogsPerPage; //8
   const indexOfFirstDogs = indexOfLastDogs - dogsPerPage; //0
   const currentDogs = allDogs.slice(indexOfFirstDogs, indexOfLastDogs);
+  // 1 ----------0-------6
+  // 2 ----------6-------12
+  // 3 ----------12------18
 
   //ayuda al renderizado
   const paginado = (pageNumber) => {
@@ -101,12 +106,18 @@ export default function Home() {
           </div>
           <div>
             <h3>Ordenar:</h3>
-            <select onChange={(e) => handleSortName(e)}>
+            <select
+              className={style.selectorden}
+              onChange={(e) => handleSortName(e)}
+            >
               <option>Alfabeticamente</option>
               <option value="asc">Ascendente</option>
               <option value="desc">Descendente</option>
             </select>
-            <select onChange={(e) => handleSortPeso(e)}>
+            <select
+              className={style.selectorden}
+              onChange={(e) => handleSortPeso(e)}
+            >
               <option>Peso</option>
               <option value="pesoasc">Ascendente</option>
               <option value="pesodesc">Descendente</option>
@@ -114,12 +125,18 @@ export default function Home() {
           </div>
           <div className={style.item3}>
             <h3>Filtrar:</h3>
-            <select onChange={(e) => handleFilterCreated(e)}>
+            <select
+              className={style.selectorden}
+              onChange={(e) => handleFilterCreated(e)}
+            >
               <option value="todos">Todos</option>
               <option value="creados">Creados</option>
               <option value="existentes">Existentes</option>
             </select>
-            <select onChange={(e) => handleFilterTemperament(e)}>
+            <select
+              className={style.selectorden}
+              onChange={(e) => handleFilterTemperament(e)}
+            >
               <option value="Todos">Temperamentos</option>
               {breeds.map((el) => (
                 <option key={el.id} value={el.name}>

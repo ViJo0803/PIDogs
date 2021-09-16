@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameDogs } from "../../actions/index";
 import style from "../SearchBar/search.module.css";
+
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -10,12 +11,14 @@ export default function SearchBar() {
   function handleInputChange(e) {
     e.preventDefault();
     setName(e.target.value);
-    console.log(name);
+    //console.log(name);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+
     dispatch(getNameDogs(name));
+    setName(" ");
   }
 
   return (
@@ -23,7 +26,9 @@ export default function SearchBar() {
       <input
         type="text"
         placeholder="Buscar..."
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => {
+          handleInputChange(e);
+        }}
       />
       <button
         className={style.btn}
