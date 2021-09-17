@@ -103,7 +103,7 @@ router.post("/dogs", async (req, res) => {
     where: { name: temperamento },
   });
   //add viene de sequelize
-  razacreada.addTemperament(temperamentoDb);
+  razacreada.addTemperament(TemperamentoDb);
   res.send("Raza creada con exito");
 });
 module.exports = router;

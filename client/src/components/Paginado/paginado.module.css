@@ -38,11 +38,12 @@
 .dots__item {
   /* Rounded border */
   border-radius: 9999px;
-  height: 12px;
-  width: 12px;
+  height: 18px;
+  width: 18px;
   margin: 0 15px;
   background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.3);
+  font-size: 19px;
 }
 
 .dots__item:active {
